@@ -13,8 +13,13 @@ app.use(cors("*"))
 app.get('/', (req,res) => {
     res.send("Hello world")
 })
-let connection = mongoose.connect(process.env.MONGO_URI).then(() => {console.log('db Connected')}).catch((e) => console.log("e => ", e)
-)
+let connection =
+    mongoose.connect(process.env.MONGO_URI, {
+         useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => { console.log('db Connected') })
+    .catch((e) => console.log("e => ", e))
 
 app.use('/auth',authRoutes)
 
