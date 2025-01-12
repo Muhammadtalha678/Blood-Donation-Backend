@@ -25,7 +25,7 @@ router.post('/register', validateRequest(registerValidator), async (req, res) =>
     const bcryptPassword = await bcrypt.hash(password, 12)
     
     //save user to db
-    const user = new UserModel({ fullname, email, password:bcryptPassword }).save()
+    const user = await new UserModel({ fullname, email, password: bcryptPassword }).save()
     sendResponse(res, 201, false, "User Registered Successfully", user)
     
 })
